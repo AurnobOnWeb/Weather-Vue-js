@@ -68,8 +68,8 @@ const previewCity = (searchResult) => {
 
 const searchQuery = ref("");
 const queryTimeout = ref(null);
-const mapboxSearchResults = ref(null);
-const searchError = ref(null);
+const apiResult = ref(null);
+const serachError = ref(null);
 
 const getSearchResults = () => {
   clearTimeout(queryTimeout.value);
@@ -79,14 +79,13 @@ const getSearchResults = () => {
         const result = await axios.get(
           `https://geocode.maps.co/search?q=${searchQuery.value}`
         );
-        mapboxSearchResults.value = result.data.features;
+        apiResult.value = result.data;
       } catch {
         searchError.value = true;
       }
-
-      return;
+    } else {
+      apiResult.value = null;
     }
-    mapboxSearchResults.value = null;
-  }, 300);
+  }, 200);
 };
 </script>
