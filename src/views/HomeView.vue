@@ -77,7 +77,7 @@ const getSearchResults = () => {
     if (searchQuery.value !== "") {
       try {
         const result = await axios.get(
-          `https://geocode.maps.co/search?q=${searchQuery.value}`
+          `https://geocode.maps.co/search?q=${searchQuery.value}&api_key=658acd4e36d1f152143277kyb628e7f`
         );
         apiResult.value = result.data;
       } catch {
