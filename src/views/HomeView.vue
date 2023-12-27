@@ -12,8 +12,8 @@
         v-if="apiResult"
         class="absoulte bg-weather-secondary text-white w-full shadow-md py-2 px-1 top-[66px]"
       >
-        <p v-if="serachError">{{ serachError }}</p>
-        <p v-if="!serachError && apiResult.length === 0">
+        <p v-if="searchError">{{ searchError }}</p>
+        <p v-if="!searchError && apiResult.length === 0">
           No Match Results. Try Different location
         </p>
         <template v-else>
@@ -69,12 +69,10 @@ const previewCity = (searchResult) => {
   });
 };
 
-const mapboxAPIKey =
-  "pk.eyJ1Ijoiam9obmtvbWFybmlja2kiLCJhIjoiY2t5NjFzODZvMHJkaDJ1bWx6OGVieGxreSJ9.IpojdT3U3NENknF6_WhR2Q";
 const searchQuery = ref("");
 const queryTimeout = ref(null);
 const apiResult = ref(null);
-const serachError = ref(null);
+const searchError = ref(null);
 
 const getSearchResults = () => {
   clearTimeout(queryTimeout.value);
@@ -82,7 +80,7 @@ const getSearchResults = () => {
     if (searchQuery.value !== "") {
       try {
         const result = await axios.get(
-          `https://geocode.maps.co/search?q=${searchQuery.value}`
+          `https://geocode.maps.co/search?q=${searchQuery.value}&api_key=658acd4e36d1f152143277kyb628e7f`
         );
         apiResult.value = result.data;
       } catch {
@@ -91,6 +89,6 @@ const getSearchResults = () => {
     } else {
       apiResult.value = null;
     }
-  }, 200);
+  }, 1000);
 };
 </script>
