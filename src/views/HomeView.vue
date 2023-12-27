@@ -69,6 +69,8 @@ const previewCity = (searchResult) => {
   });
 };
 
+const mapboxAPIKey =
+  "pk.eyJ1Ijoiam9obmtvbWFybmlja2kiLCJhIjoiY2t5NjFzODZvMHJkaDJ1bWx6OGVieGxreSJ9.IpojdT3U3NENknF6_WhR2Q";
 const searchQuery = ref("");
 const queryTimeout = ref(null);
 const apiResult = ref(null);
@@ -80,7 +82,7 @@ const getSearchResults = () => {
     if (searchQuery.value !== "") {
       try {
         const result = await axios.get(
-          `https://geocode.maps.co/search?q=${searchQuery.value}&api_key=658acd4e36d1f152143277kyb628e7f`
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery.value}.json?access_token=${mapboxAPIKey}&types=place`
         );
         apiResult.value = result.data;
       } catch {
